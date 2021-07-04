@@ -9,8 +9,9 @@ import Detail from './pages/Detail'
 import List from './pages/List'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
-class App extends React.Component {
-  constructor(props) {
+
+class App extends React.Component<any, any>  {
+  constructor(props: any) {
     super(props);
 
     // Moblie first
@@ -18,9 +19,9 @@ class App extends React.Component {
       isOpen: false,
       isMobile: true
     };
-
-    this.previousWidth = -1;
   }
+
+  previousWidth: Number = -1;
 
   updateWidth() {
     const width = window.innerWidth;

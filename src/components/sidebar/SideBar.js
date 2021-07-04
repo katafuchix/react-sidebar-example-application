@@ -15,11 +15,21 @@ import classNames from "classnames";
 
 class SideBar extends React.Component {
 
+/*
+  constructor(props: IProps) {
+    super(props);
+    this.state = {};
+  }
+*/
   myClickHandler(e) {
     console.log(e);
   }
 
   render() {
+    const category = this.props.category;
+    console.log(this.state);
+    console.log(this.props);
+
     if (typeof window !== `undefined`) {
       console.log(window.location.href);
     }
