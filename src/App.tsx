@@ -7,10 +7,26 @@ import Home from './pages/Home'
 import About from './pages/About'
 import Detail from './pages/Detail'
 import List from './pages/List'
+import Movie from './pages/Movie'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import AppDataStore from './stores/AppDataStore';
+import * as common from './components/common/BasePage';
+import { IResource } from './resources/IResource';
 
+interface IParams extends common.IParams {
+}
 
-class App extends React.Component<any, any>  {
+interface IProps extends common.IProps<IParams> {
+}
+
+interface IState extends common.IState {
+  isOpen: boolean;
+  isMobile: boolean;
+}
+
+//class App extends React.Component<any, any>  {
+class App extends common.BasePage<IProps, IState> {
+
   constructor(props: any) {
     super(props);
 
@@ -53,31 +69,36 @@ class App extends React.Component<any, any>  {
     window.removeEventListener("resize", this.updateWidth.bind(this));
   }
 
-  toggle = () => {
+  toggle() {
     this.setState({ isOpen: !this.state.isOpen });
   };
 
   render() {
     return (
-      <div className="App wrapper">
-        <SideBar toggle={this.toggle} isOpen={this.state.isOpen} />
-        <Router>
-            <Switch>
-              <Route exact path="/">
-                <Content toggle={this.toggle} isOpen={this.state.isOpen} />
-              </Route>
-              <Route path="/about">
-                <About toggle={this.toggle} isOpen={this.state.isOpen} />
-              </Route>
-              <Route path="/detail">
-                <Detail toggle={this.toggle} isOpen={this.state.isOpen} />
-              </Route>
-              <Route path="/list">
-                <List toggle={this.toggle} isOpen={this.state.isOpen} />
-              </Route>
-            </Switch>
-        </Router>
-      </div>
+      <AppDataStore.Container>
+        <div className="App wrapper">
+          <SideBar isOpen={this.state.isOpen} toggle={() => this.toggle()} />
+          <Router>
+              <Switch>
+                <Route exact path="/">
+                  <Content toggle={() => this.toggle()} isOpen={this.state.isOpen} />
+                </Route>
+                <Route path="/about">
+                  <About toggle={() => this.toggle()} isOpen={this.state.isOpen} />
+                </Route>
+                <Route path="/detail">
+                  <Detail toggle={() => this.toggle()} isOpen={this.state.isOpen} />
+                </Route>
+                <Route path="/list">
+                  <List isOpen={this.state.isOpen} toggle={() => this.toggle()}  />
+                </Route>
+                <Route path="/movie">
+                  <Movie  isOpen={this.state.isOpen} toggle={() => this.toggle()} />
+                </Route>
+              </Switch>
+          </Router>
+        </div>
+      </AppDataStore.Container>
     );
   }
 /*

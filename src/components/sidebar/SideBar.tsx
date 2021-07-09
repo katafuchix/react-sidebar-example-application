@@ -1,4 +1,5 @@
 import React from "react";
+//import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
@@ -12,17 +13,32 @@ import {
 import SubMenu from "./SubMenu";
 import { Nav, Button } from "react-bootstrap";
 import classNames from "classnames";
-
-class SideBar extends React.Component {
+import * as common from '../common/BasePage';
+//import * as common from '../common/BaseListComponent';
+import AppDataStore from '../../stores/AppDataStore';
+import { IResource } from '../../resources/IResource';
 
 /*
-  constructor(props: IProps) {
+interface IProps extends common.IProps {
+  isOpen?: boolean;
+  toggle?: () => void;
+}
+*/
+/*
+interface IProps extends common.IProps<IResource> {
+  isOpen?: boolean;
+  toggle?: () => void;
+}
+*/
+
+interface IState extends common.IState {
+}
+
+class SideBar extends React.Component<any, IState> {
+
+  constructor(props: any) {
     super(props);
     this.state = {};
-  }
-*/
-  myClickHandler(e) {
-    console.log(e);
   }
 
   render() {
@@ -57,6 +73,13 @@ class SideBar extends React.Component {
             </Nav.Link>
           </Nav.Item>
 
+          <Nav.Item>
+            <Nav.Link href="/list">
+              <FontAwesomeIcon icon={faHome} className="mr-2" />
+              list
+            </Nav.Link>
+          </Nav.Item>
+
           <SubMenu
             title="Pages"
             icon={faCopy}
@@ -64,7 +87,7 @@ class SideBar extends React.Component {
           />
 
           <Nav.Item>
-            <Nav.Link href="/about" onClick={this.myClickHandler}>
+            <Nav.Link href="/about">
               <FontAwesomeIcon icon={faBriefcase} className="mr-2" />
               About
             </Nav.Link>
