@@ -1,5 +1,4 @@
 import React from "react";
-//import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
@@ -13,38 +12,28 @@ import {
 import SubMenu from "./SubMenu";
 import { Nav, Button } from "react-bootstrap";
 import classNames from "classnames";
-import * as common from '../common/BasePage';
-//import * as common from '../common/BaseListComponent';
+import * as common from '../common/BaseComponent';
 import AppDataStore from '../../stores/AppDataStore';
-import { IResource } from '../../resources/IResource';
 
-/*
 interface IProps extends common.IProps {
-  isOpen?: boolean;
-  toggle?: () => void;
+  isOpen: boolean;
+  toggle: () => void;
 }
-*/
-/*
-interface IProps extends common.IProps<IResource> {
-  isOpen?: boolean;
-  toggle?: () => void;
-}
-*/
 
 interface IState extends common.IState {
 }
 
-class SideBar extends React.Component<any, IState> {
-
-  constructor(props: any) {
+//class SideBar extends React.Component<any, IState> {
+class SideBar extends common.BaseComponent<IProps, IState> {
+  constructor(props: IProps) {
     super(props);
     this.state = {};
   }
 
   render() {
-    const category = this.props.category;
-    console.log(this.state);
-    console.log(this.props);
+    //const category = this.props.category;
+    //console.log(this.state);
+    //console.log(this.props);
 
     if (typeof window !== `undefined`) {
       console.log(window.location.href);
@@ -119,4 +108,5 @@ class SideBar extends React.Component<any, IState> {
   }
 }
 
-export default SideBar;
+//export default SideBar;
+export default AppDataStore.withStores(SideBar);
