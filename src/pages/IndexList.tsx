@@ -21,7 +21,6 @@ interface IProps extends common.IProps<IResource> {
 }
 
 interface IState extends common.IState<IResource> {
-
 }
 
 class IndexList extends common.BaseListComponent<IResource, IProps, IState> {
@@ -38,6 +37,7 @@ class IndexList extends common.BaseListComponent<IResource, IProps, IState> {
   }
 
   render() {
+    console.log("this.state.response?.data");
     console.log(this.state.response?.data);
     return (
       <React.Fragment>
@@ -48,29 +48,28 @@ class IndexList extends common.BaseListComponent<IResource, IProps, IState> {
             </button>
           </div>
 
-          <Table bordered>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>サクラ会員</th>
-                <th>相手</th>
-                <th>最終メッセージ</th>
-                <th>男性側最終更新</th>
-              </tr>
-            </thead>
-            <tbody>
-            {this.state.response?.data.map((room) => (
-              <tr>
-                <td colSpan={3}>データが見つかりません。</td>
-              </tr>
+
+            {this.state.response?.data.map((index,room) => (
+              <>
+              {room%3==0 ? '<div className="row mt-5">' : ''}
+              <div className="col-lg-4 mb-4 grid-margin">
+                <div className="card h-100">
+                    <h4 className="card-header">{room}{room%3==0 ? 'a' : ''}{index.title}</h4>
+                    <div className="card-body">
+                      <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p>
+                    </div>
+                    <div className="card-footer">
+                      <Button variant="btn btn-primary">Learn More</Button>
+                    </div>
+                </div>
+              </div>
+              </>
             ))}
             {this.state.response?.data.length === 0 && (
               <tr>
                 <td colSpan={3}>データが見つかりません。</td>
               </tr>
             )}
-            </tbody>
-          </Table>
           <Paginator currentPage={this.state.response?.meta.current_page} totalPage={this.state.response?.meta.total_pages} onPageSelected={(page) => this.selectPage(page)}/>
         </LoadingIndicator>
       </React.Fragment>

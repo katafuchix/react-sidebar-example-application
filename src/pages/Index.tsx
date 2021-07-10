@@ -9,6 +9,7 @@ import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCar
 import AppDataStore from '../stores/AppDataStore';
 import * as common from '../components/common/BasePage';
 import Movie from "./Movie";
+import IndexList from './IndexList'
 
 interface IParams extends common.IParams {
 }
@@ -40,9 +41,21 @@ class Index extends common.BasePage<IProps, IState> {
       >
         <NavBar toggle={() => this.props.toggle()} />
         index
+
+        <IndexList page={this.state.page} onPageSelected={(page) => this.selectPage(page)}
+          onResourceSelected={() => this.onMessageSelected()} />
+
       </Container>
       </React.Fragment>
     );
+  }
+
+  onMessageSelected() {
+
+  }
+
+  selectPage(page: any) {
+    console.log(page);
   }
 
   click() {

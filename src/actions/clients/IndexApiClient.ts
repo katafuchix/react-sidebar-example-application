@@ -7,6 +7,6 @@ export class IndexApiClient extends BaseApiClient<IResource> {
   }
 
   protected basePath(): string {
-    return 'trickster/v1/message_rooms';
+    return 'gra/index.json';
   }
 }
