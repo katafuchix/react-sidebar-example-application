@@ -8,6 +8,7 @@ import About from './pages/About'
 import Detail from './pages/Detail'
 import List from './pages/List'
 import Movie from './pages/Movie'
+import Index from './pages/Index'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import AppDataStore from './stores/AppDataStore';
 import * as common from './components/common/BasePage';
@@ -81,7 +82,7 @@ class App extends common.BasePage<IProps, IState> {
           <Router>
               <Switch>
                 <Route exact path="/">
-                  <Content toggle={() => this.toggle()} isOpen={this.state.isOpen} />
+                  <Index toggle={() => this.toggle()} isOpen={this.state.isOpen} />
                 </Route>
                 <Route path="/about">
                   <About toggle={() => this.toggle()} isOpen={this.state.isOpen} />
