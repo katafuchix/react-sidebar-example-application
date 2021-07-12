@@ -38,7 +38,24 @@ class IndexList extends common.BaseListComponent<IResource, IProps, IState> {
 
   render() {
     console.log("this.state.response?.data");
-    console.log(this.state.response?.data);
+    var tmp = [];
+    if (this.state.response?.data) {
+      console.log(this.state.response?.data);
+      console.log(this.state.response?.data.length)
+      for (var i = 0; i < this.state.response?.data.length; i++) {
+        console.log(i);
+        console.log(this.state.response?.data[i]);
+      }
+      var part = 4;
+      for(var i = 0; i < this.state.response?.data.length; i += part) {
+          tmp.push(this.state.response?.data.slice(i, i + part));
+      }
+    }
+    console.log(tmp);
+    /*for (var i = 0; i < this.state.response?.data.length; i++) {
+      console.log(i);
+      console.log(this.state.response?.data[i]);
+    }*/
     return (
       <React.Fragment>
         <LoadingIndicator watch={this.state.response}>
@@ -48,13 +65,12 @@ class IndexList extends common.BaseListComponent<IResource, IProps, IState> {
             </button>
           </div>
 
-
-            {this.state.response?.data.map((index,room) => (
+            <div className="row mt-5">
+            {tmp.map((data,room) => (
               <>
-              {room%3==0 ? '<div className="row mt-5">' : ''}
-              <div className="col-lg-4 mb-4 grid-margin">
+              <div className="col-lg-3 mb-3 grid-margin">
                 <div className="card h-100">
-                    <h4 className="card-header">{room}{room%3==0 ? 'a' : ''}{index.title}</h4>
+                    <h4 className="card-header">{room}{data.length}</h4>
                     <div className="card-body">
                       <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p>
                     </div>
@@ -65,6 +81,7 @@ class IndexList extends common.BaseListComponent<IResource, IProps, IState> {
               </div>
               </>
             ))}
+            </div>
             {this.state.response?.data.length === 0 && (
               <tr>
                 <td colSpan={3}>データが見つかりません。</td>
