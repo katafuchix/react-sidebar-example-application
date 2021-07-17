@@ -29,6 +29,10 @@ class Index extends common.BasePage<IProps, IState> {
     this.state = {};
   }
 
+  componentDidUpdate(prevProps: IProps) {
+    window.scrollTo(0, 0);
+  }
+
   render() {
     console.log("process.env.REACT_APP_API_ENDPOINT");
     console.log(process.env.REACT_APP_API_ENDPOINT);
@@ -51,11 +55,12 @@ class Index extends common.BasePage<IProps, IState> {
   onMessageSelected() {
 
   }
-
+/*
   selectPage(page: any) {
     console.log(page);
+    window.scrollTo(0, 0);
   }
-
+*/
   click() {
     console.log("click");
     this.props.history.push({

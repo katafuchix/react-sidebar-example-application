@@ -12,7 +12,7 @@ import Index from './pages/Index'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import AppDataStore from './stores/AppDataStore';
 import * as common from './components/common/BasePage';
-import { IResource } from './resources/IResource';
+import ScrollToTop from './components/common/ScrollToTop';
 
 interface IParams extends common.IParams {
 }
@@ -80,6 +80,7 @@ class App extends common.BasePage<IProps, IState> {
         <div className="App wrapper">
           <SideBar isOpen={this.state.isOpen} toggle={() => this.toggle()} />
           <Router>
+              <ScrollToTop />
               <Switch>
                 <Route exact path="/">
                   <Index toggle={() => this.toggle()} isOpen={this.state.isOpen} />
@@ -97,6 +98,7 @@ class App extends common.BasePage<IProps, IState> {
                   <Movie  isOpen={this.state.isOpen} toggle={() => this.toggle()} />
                 </Route>
               </Switch>
+              <ScrollToTop />
           </Router>
         </div>
       </AppDataStore.Container>

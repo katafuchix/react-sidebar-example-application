@@ -29,32 +29,32 @@ export abstract class BaseApiClient<TResource extends IResource> {
 
   async get(id?: number): Promise<TResource | null> {
     console.log(`Retrieving a resource (id='${id}').`);
-    return await this.invoke(async (headers) => {
-      const response = await axios.get(this.getGetUrl(id), { headers });
+    //return await this.invoke(async (headers) => {
+      const response = await axios.get(this.getGetUrl(id), { /*headers*/ });
       return this.reverseResource(response.data.data);
-    });
+    //});
   }
 
   async getWithParams(options?: any): Promise<TResource | null> {
     var querystring = Object.keys(options).map((o) => options[o] ? `${o}=${encodeURIComponent(options[o])}` : null).filter((o) => !!o).join('&');
-    return await this.invoke(async (headers) => {
-      const response = await axios.get(this.getGetUrl() + '?' + querystring, { headers });
+    //return await this.invoke(async (headers) => {
+      const response = await axios.get(this.getGetUrl() + '?' + querystring, { /*headers*/ });
       return this.reverseResource(response.data.data);
-    });
+    //});
   }
-  
+
   async list(options?: any): Promise<IPaginatedResponse<TResource> | null> {
     console.log(`Retrieving resources.`);
     const querystring = Object.keys(options).map((o) => options[o] ? `${o}=${encodeURIComponent(options[o])}` : null).filter((o) => !!o).join('&');
-    return await this.invoke(async (headers) => {
-      const response = await axios.get(`${this.getListUrl()}?${querystring}`, { headers });
+    //return await this.invoke(async (headers) => {
+      const response = await axios.get(`${this.getListUrl()}?${querystring}`, { /*headers*/ });
       if (response.data && response.data.data) {
         for (let i = 0; i < response.data.data.length; i++) {
           response.data.data[i] = this.reverseListItemResource(response.data.data[i]);
         }
       }
       return response.data as IPaginatedResponse<TResource>;
-    });
+    //});
   }
 
   async save(resource?: TResource): Promise<TResource | null> {

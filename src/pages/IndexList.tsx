@@ -41,63 +41,61 @@ class IndexList extends common.BaseListComponent<IResource, IProps, IState> {
     //console.log("this.state.response?.data");
     var tmp = [];
     if (this.state.response?.data) {
-      console.log(this.state.response?.data);
-      console.log(this.state.response?.data.length)
-      for (var i = 0; i < this.state.response?.data.length; i++) {
+      //console.log(this.state.response?.data);
+      //console.log(this.state.response?.data.length)
+      /*for (var i = 0; i < this.state.response?.data.length; i++) {
         console.log(i);
         console.log(this.state.response?.data[i]);
-      }
+      }*/
       var part = 3;
       for(var i = 0; i < this.state.response?.data.length; i += part) {
           tmp.push(this.state.response?.data.slice(i, i + part));
       }
     }
-    //console.log(tmp);
+    console.log(tmp);
     return (
       <React.Fragment>
         <LoadingIndicator watch={this.state.response}>
-
         <div className="row align-items-stretch retro-layout-2">
-
             {tmp.map((data,index) => (
               <>
               {data.map((item, i) => (
                 <>
-
-                <div className="col-lg-4 col-md-4 col-sm-4 padbot30 post_item_block">
+                <div className="col-lg-4 col-md-4 col-sm-4 post_item_block">
       						<div className="post_item">
       							<div className="post_item_img img-overlay-70">
       								<Image style={{ width: '100%'}} src={Utils.toThumbImageUrl(item)} className="img-overlay-70" alt="" />
-                        <div className="date">2021-07-13</div>
-                        <div className="views">100views</div>
+                        <div className="date">{item.date?.split(' ')[0]}</div>
+                        <div className="views">{item.view_count} views</div>
                         <div className="mask-content-sm">
                           <h3 className="title-medium-light">
                             {item.title}
                           </h3>
                         </div>
+                        <span className={Utils.getMovieTypeClass(item.movie)}>{Utils.getMovieType(item.movie)}</span>
       							</div>
       							<div className="post_item_content">
       								<ul className="post_item_inf">
-      									<li><a href="javascript:void(0);">Anna</a> |</li>
-      									<li><a href="javascript:void(0);">Photography</a> |</li>
-      									<li><a href="javascript:void(0);">10 Comments</a></li>
+                        {item.keywords.map((word: any, k: any) => (
+                          <li><a href="">{word}</a></li>
+                          ))}
       								</ul>
       							</div>
       						</div>
       					</div>
-
                 </>
               ))}
               </>
             ))}
             </div>
-
             {this.state.response?.data.length === 0 && (
               <MDBRow>
                 データが見つかりません。
               </MDBRow>
             )}
-          <Paginator currentPage={this.state.response?.meta.current_page} totalPage={this.state.response?.meta.total_pages} onPageSelected={(page) => this.selectPage(page)}/>
+          <Paginator currentPage={this.state.response?.meta.current_page}
+            totalPage={this.state.response?.meta.total_pages}
+            onPageSelected={(page) => this.selectPage(page)} />
         </LoadingIndicator>
       </React.Fragment>
     );
