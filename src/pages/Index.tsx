@@ -26,7 +26,6 @@ class Index extends common.BasePage<IProps, IState> {
 
   constructor(props: IProps) {
     super(props);
-    console.log(props);
     this.state = {};
   }
 
@@ -40,7 +39,6 @@ class Index extends common.BasePage<IProps, IState> {
         className={classNames("content", { "is-open": this.props.isOpen })}
       >
         <NavBar toggle={() => this.props.toggle()} />
-        index
 
         <IndexList page={this.state.page} onPageSelected={(page) => this.selectPage(page)}
           onResourceSelected={() => this.onMessageSelected()} />

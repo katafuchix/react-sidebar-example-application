@@ -1,9 +1,7 @@
 import React from "react";
-import classNames from "classnames";
 import { Container, Button } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import NavBar from "../components/content/Navbar";
-import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCardImage, MDBBtn, MDBRipple } from 'mdb-react-ui-kit';
 import { Table, Image, Popover, OverlayTrigger　} from 'react-bootstrap';
 import AppDataStore from '../stores/AppDataStore';
 import * as common from '../components/common/BaseListComponent';
@@ -15,6 +13,7 @@ import { BaseApiClient } from '../actions/clients/BaseApiClient';
 import { IndexApiClient } from '../actions/clients/IndexApiClient';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRedo } from "@fortawesome/free-solid-svg-icons";
+import Utils from '../utils/Utils';
 
 interface IProps extends common.IProps<IResource> {
     onReload?: () => void;
@@ -37,7 +36,7 @@ class IndexList extends common.BaseListComponent<IResource, IProps, IState> {
   }
 
   render() {
-    console.log("this.state.response?.data");
+    //console.log("this.state.response?.data");
     var tmp = [];
     if (this.state.response?.data) {
       console.log(this.state.response?.data);
@@ -51,34 +50,29 @@ class IndexList extends common.BaseListComponent<IResource, IProps, IState> {
           tmp.push(this.state.response?.data.slice(i, i + part));
       }
     }
-    console.log(tmp);
-    /*for (var i = 0; i < this.state.response?.data.length; i++) {
-      console.log(i);
-      console.log(this.state.response?.data[i]);
-    }*/
+    //console.log(tmp);
     return (
       <React.Fragment>
         <LoadingIndicator watch={this.state.response}>
-          <div text-align="right">
-            <button className="message_refresh_btn" type="button" onClick={() => this.onReload()}>
-              <FontAwesomeIcon icon={faRedo}  size="sm" />
-            </button>
-          </div>
-
             <div className="row mt-5">
-            {tmp.map((data,room) => (
+            {tmp.map((data,index) => (
               <>
-              <div className="col-lg-3 mb-3 grid-margin">
-                <div className="card h-100">
-                    <h4 className="card-header">{room}{data.length}</h4>
-                    <div className="card-body">
-                      <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p>
-                    </div>
-                    <div className="card-footer">
-                      <Button variant="btn btn-primary">Learn More</Button>
-                    </div>
+              {data.map((item, i) => (
+                <>
+                <div className="col-lg-3 mb-3 grid-margin">
+                  <div className="card h-100">
+                      <h6 className="card-header">{item.title}</h6>
+                      <div className="card-body">
+                      <Image width={200} src={Utils.toThumbImageUrl(item)} alt="アイコン" />
+                        <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p>
+                      </div>
+                      <div className="card-footer">
+                        <Button variant="btn btn-primary">Learn More</Button>
+                      </div>
+                  </div>
                 </div>
-              </div>
+                </>
+              ))}
               </>
             ))}
             </div>
