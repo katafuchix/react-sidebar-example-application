@@ -47,7 +47,7 @@ class IndexList extends common.BaseListComponent<IResource, IProps, IState> {
         console.log(i);
         console.log(this.state.response?.data[i]);
       }
-      var part = 4;
+      var part = 3;
       for(var i = 0; i < this.state.response?.data.length; i += part) {
           tmp.push(this.state.response?.data.slice(i, i + part));
       }
@@ -56,7 +56,9 @@ class IndexList extends common.BaseListComponent<IResource, IProps, IState> {
     return (
       <React.Fragment>
         <LoadingIndicator watch={this.state.response}>
-            <div className="row recent_posts animated fadeInUp" data-appear-top-offset="-200" data-animated="fadeInUp">
+
+        <div className="row align-items-stretch retro-layout-2">
+
             {tmp.map((data,index) => (
               <>
               {data.map((item, i) => (
@@ -64,12 +66,17 @@ class IndexList extends common.BaseListComponent<IResource, IProps, IState> {
 
                 <div className="col-lg-4 col-md-4 col-sm-4 padbot30 post_item_block">
       						<div className="post_item">
-      							<div className="post_item_img">
-      								<Image style={{ width: '100%'}} src={Utils.toThumbImageUrl(item)} alt="" />
-      								<a className="link" href="blog-post.html"></a>
+      							<div className="post_item_img img-overlay-70">
+      								<Image style={{ width: '100%'}} src={Utils.toThumbImageUrl(item)} className="img-overlay-70" alt="" />
+                        <div className="date">2021-07-13</div>
+                        <div className="views">100views</div>
+                        <div className="mask-content-sm">
+                          <h3 className="title-medium-light">
+                            {item.title}
+                          </h3>
+                        </div>
       							</div>
       							<div className="post_item_content">
-      								<a className="title" href="blog-post.html">Inteligent Transitions In UX Design</a>
       								<ul className="post_item_inf">
       									<li><a href="javascript:void(0);">Anna</a> |</li>
       									<li><a href="javascript:void(0);">Photography</a> |</li>

@@ -154,34 +154,80 @@ li a.dropdown-toggle::after {
 /*-----------------------------------------------------------------------------------*/
 /*	RECENT POSTS
 /*-----------------------------------------------------------------------------------*/
+.post_item {
+  padding-bottom: 12px;
+}
 .post_item_img {position:relative;}
 .post_item_img:before {
 	content:'';
 	position:absolute;
 	z-index:25;
 	left:0;
-	top:0;
+	bottom:0;
 	width:100%;
 	height:100%;
 	transition: all 0.3s ease-in-out;
 	-webkit-transition: all 0.3s ease-in-out;
 }
-.post_item:hover .post_item_img:before {background-color:rgba(0,0,0,0.8);}
-.post_item_content {padding:23px 0 0;}
+.img-overlay-70 {
+    position: relative;
+    display: block;
+}
+.img-overlay-70::before {
+    background-image: linear-gradient(transparent,#111),linear-gradient(transparent,#111);
+    height: 60%;
+    opacity: .7;
+}
+.post_item .date {
+    position: absolute;
+    z-index: 27;
+    top: 1px;
+    right: 4px;
+    font-size: 14px;
+    color: #fff;
+    text-shadow:1px 0 5px black;
+}
+.post_item .views {
+    position: absolute;
+    z-index: 27;
+    bottom: 1px;
+    right: 4px;
+    font-size: 14px;
+    color: #fff;
+    text-shadow:1px 0 5px black;
+}
+.post_item .mask-content-sm {
+    position: absolute;
+    z-index: 27;
+    bottom: 1px;
+    left: 20px;
+    padding-right: 20px;
+}
+
+h3.title-medium-light {
+    font-weight: 500;
+    color: #fff;
+    font-size: 16px;
+    line-height: 1.5;
+    text-shadow:1px 0 5px black;
+}
+
+.post_item_content {padding:2px 0 0;}
 .post_item_content a.title {
 	font-weight:300;
 	line-height:34px;
 	font-size:24px;
 	color:#333;
 }
+
 .post_item_inf {padding-top:2px;}
 .post_item_inf li {
 	display:inline-block;
 	padding-right:12px;
-	color:#ccc;
+	color:gray;
 }
 .post_item_inf a {
-	padding-right:12px;
+	padding-right:0px;
 	font-weight:300;
 	font-size:14px;
 }
@@ -192,7 +238,7 @@ li a.dropdown-toggle::after {
 	bottom:30%;
 	width:60px;
 	height:36px;
-	margin:0 0 -18px -30px;
+	/*margin:0 0 -18px -30px;*/
 	opacity:0;
 	background-repeat:no-repeat;
 	background-position:0 0;
