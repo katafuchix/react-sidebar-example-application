@@ -83,6 +83,16 @@ class List extends common.BasePage<IProps, IState> {
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
+          <MDBCol>
+            <MDBCard>
+              <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/men.jpg" />
+              <MDBCardBody>
+                <MDBCardTitle>MDBCard title</MDBCardTitle>
+                <MDBCardText>Some quick example text to build on the card title and make up the bulk of the card's content.</MDBCardText>
+                <MDBBtn href="#" onClick={() => this.click()}>MDBBtn</MDBBtn>
+              </MDBCardBody>
+            </MDBCard>
+          </MDBCol>
         </MDBRow>
 
       </Container>

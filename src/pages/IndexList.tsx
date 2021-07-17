@@ -14,6 +14,8 @@ import { IndexApiClient } from '../actions/clients/IndexApiClient';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRedo } from "@fortawesome/free-solid-svg-icons";
 import Utils from '../utils/Utils';
+import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCardImage, MDBBtn, MDBRipple } from 'mdb-react-ui-kit';
+
 
 interface IProps extends common.IProps<IResource> {
     onReload?: () => void;
@@ -54,32 +56,39 @@ class IndexList extends common.BaseListComponent<IResource, IProps, IState> {
     return (
       <React.Fragment>
         <LoadingIndicator watch={this.state.response}>
-            <div className="row mt-5">
+            <div className="row recent_posts animated fadeInUp" data-appear-top-offset="-200" data-animated="fadeInUp">
             {tmp.map((data,index) => (
               <>
               {data.map((item, i) => (
                 <>
-                <div className="col-lg-3 mb-3 grid-margin">
-                  <div className="card h-100">
-                      <h6 className="card-header">{item.title}</h6>
-                      <div className="card-body">
-                      <Image width={200} src={Utils.toThumbImageUrl(item)} alt="アイコン" />
-                        <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p>
-                      </div>
-                      <div className="card-footer">
-                        <Button variant="btn btn-primary">Learn More</Button>
-                      </div>
-                  </div>
-                </div>
+
+                <div className="col-lg-4 col-md-4 col-sm-4 padbot30 post_item_block">
+      						<div className="post_item">
+      							<div className="post_item_img">
+      								<Image style={{ width: '100%'}} src={Utils.toThumbImageUrl(item)} alt="" />
+      								<a className="link" href="blog-post.html"></a>
+      							</div>
+      							<div className="post_item_content">
+      								<a className="title" href="blog-post.html">Inteligent Transitions In UX Design</a>
+      								<ul className="post_item_inf">
+      									<li><a href="javascript:void(0);">Anna</a> |</li>
+      									<li><a href="javascript:void(0);">Photography</a> |</li>
+      									<li><a href="javascript:void(0);">10 Comments</a></li>
+      								</ul>
+      							</div>
+      						</div>
+      					</div>
+
                 </>
               ))}
               </>
             ))}
             </div>
+
             {this.state.response?.data.length === 0 && (
-              <tr>
-                <td colSpan={3}>データが見つかりません。</td>
-              </tr>
+              <MDBRow>
+                データが見つかりません。
+              </MDBRow>
             )}
           <Paginator currentPage={this.state.response?.meta.current_page} totalPage={this.state.response?.meta.total_pages} onPageSelected={(page) => this.selectPage(page)}/>
         </LoadingIndicator>
